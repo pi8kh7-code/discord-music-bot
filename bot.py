@@ -49,6 +49,9 @@ def fetch_audio_info(query: str):
 async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     print("Bot is ready! Use !play <song> and !stop")
+    for guild in bot.guilds:
+        if guild.voice_client:
+            await guild.voice_client.disconnect(force=True)
 
 
 @bot.command(name="play")
@@ -61,7 +64,7 @@ async def play(ctx: commands.Context, *, query: str):
 
     try:
         if ctx.voice_client is None:
-            await voice_channel.connect(timeout=30.0, reconnect=True)
+            await voice_channel.connect(timeout=30.0, reconnect=False)
         elif ctx.voice_client.channel != voice_channel:
             await ctx.voice_client.move_to(voice_channel)
     except Exception as e:
