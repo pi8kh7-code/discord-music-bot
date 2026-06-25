@@ -1,3 +1,7 @@
 discord.py==2.4.0
 yt-dlp
 PyNaCl
+discord.py==2.4.0
+yt-dlp
+PyNaCl
+audioop-lts
